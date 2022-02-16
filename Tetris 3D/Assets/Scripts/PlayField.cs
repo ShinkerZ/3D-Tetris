@@ -29,7 +29,7 @@ public class PlayField : MonoBehaviour
                             Mathf.RoundToInt(posToRound.y),
                             Mathf.RoundToInt(posToRound.z));
     }
-    public bool CheckInsidePlayField(Vector3 pos)
+    public bool CheckInsidePlayField(Vector3 pos) // check is block is inside the grids
     {
         return ((int)pos.x >= 0 && (int)pos.x < gridSizeX &&
                 (int)pos.z >= 0 && (int)pos.z < gridSizeZ &&
@@ -85,7 +85,7 @@ public class PlayField : MonoBehaviour
         newBlock.GetComponent<TetrisBlock>().ghost  =  newGhost.GetComponent<GhostBehavior>();
 
         GetPreview();
-        Previewer.prevInstance.ShowPreview(randomIndex);
+        Previewer.prevInstance.ShowPreview(randomIndex); // PREVIEW SHOW
         //playFieldInstance.UpdateGrid(newBlock.GetComponent<TetrisBlock>()); //every time we spawn a new block we have to update grid
     }
     public void GetPreview()
@@ -104,7 +104,7 @@ public class PlayField : MonoBehaviour
                 MoveAllLayesDown(y);
             }
         }
-        if(layersCleared>0)
+        if(layersCleared>0) // in case we have deleted a row or more than 1
         {
             GameManager.gmInstance.LayersCleared(layersCleared);
         }

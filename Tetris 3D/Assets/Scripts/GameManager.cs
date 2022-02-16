@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         gmInstance = this;
     }
-    private void Start()
+    void Start()
     {
         SetScore(score);
     }
@@ -29,28 +29,28 @@ public class GameManager : MonoBehaviour
         return fallSpeed;
     }
 
-    public void LayersCleared(int amount)
+    public void LayersCleared(int amount) // amount is the rows to cleared amount -- then set a rewarding score system in case 2 or more layers are cleared
     {
         switch(amount)
         {
             case 1:
-                SetScore(40);
+                SetScore(400);
                 break;
             case 2:
-                SetScore(80);
+                SetScore(800);
                 break;
             case 3:
-                SetScore(160);
+                SetScore(1600);
                 break;
             case 4:
-                SetScore(320);
+                SetScore(3200);
                 break;
         }
 
         layersRemoved += amount;
         UIManager.uimnInstance.UpdateUI(score, level, layersRemoved);
     }
-    void CalculateLevel()
+    void CalculateLevel()  // Level is dependant on SCORE and will increase the fall speed
     {
         if(score <= 1000)
         {

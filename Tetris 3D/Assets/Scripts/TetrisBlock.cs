@@ -14,7 +14,7 @@ public class TetrisBlock : MonoBehaviour
     void Start()
     { 
         fallTime = GameManager.gmInstance.ReadFallSpeed();
-        //Debug.Log(CheckValidMove());
+        
         if (!CheckValidMove())
         {
             GameManager.gmInstance.SetGameIsOver();
@@ -29,16 +29,16 @@ public class TetrisBlock : MonoBehaviour
         {
             transform.position += Vector3.down;
 
-            if (!CheckValidMove()) // If it returns false
+            if (!CheckValidMove()) // Not a Valid Move
             {
                 transform.position += Vector3.up;
                 //Delete Layer
-                PlayField.playFieldInstance.DeleteLAyer();
+                PlayField.playFieldInstance.DeleteLAyer(); // Delete Layer first checks if there are any full rows or layers first
                 Destroy(ghost.gameObject); // delete ghost
                 enabled = false; // disable script from block
 
 
-                if (!GameManager.gmInstance.ReadGameOver())
+                if (!GameManager.gmInstance.ReadGameOver())// if not a valid move and not Game Over , spawn a new block
                 {
                     // Create a new terris block
                     //Debug.Log("About To Spawn");
@@ -49,10 +49,10 @@ public class TetrisBlock : MonoBehaviour
             {
                 PlayField.playFieldInstance.UpdateGrid(this);
             }
-            previousTime = Time.time; // prev Time is now the current time
+            previousTime = Time.time; // prev Time is now the current time 
         }   
     }
-    public void SetInput(Vector3 direction)
+    public void SetInput(Vector3 direction) // Actual directional control
     {
         transform.position += direction;
         if(!CheckValidMove())
@@ -64,7 +64,7 @@ public class TetrisBlock : MonoBehaviour
             PlayField.playFieldInstance.UpdateGrid(this);
         }
     }
-    public void SetRotationInput(Vector3 rotation)
+    public void SetRotationInput(Vector3 rotation) // Actual Rotational control
     {
         transform.Rotate(rotation, Space.World);
         if(!CheckValidMove())
@@ -100,7 +100,7 @@ public class TetrisBlock : MonoBehaviour
         }
         return true;
     }
-    public void Inputs()
+    public void Inputs() // Space is always avilable -- depends on quadrant location  invert Button movement and rotation controller 
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {

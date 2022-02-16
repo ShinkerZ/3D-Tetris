@@ -30,7 +30,7 @@ public class CameraControl : MonoBehaviour
         Orbit();
         DetectQuadrant();
     }
-    void Orbit()
+    void Orbit() // Rotate around the field with the mouse
     {
         if(Input.GetMouseButton(0))
         {
@@ -49,30 +49,30 @@ public class CameraControl : MonoBehaviour
             lastPos = Input.mousePosition;
         }
     }
-    float ClampAngle(float angle, float min, float max)
+    float ClampAngle(float angle, float min, float max) // Custom Clamping for our UP & DOWN movement aroud the field
     {
         if (angle < 0) angle = 360 + angle;
         if (angle > 180f) return Mathf.Max(angle, 360 + min);
         return Mathf.Min(angle, max);
     }
-    public void DetectQuadrant()
+    public void DetectQuadrant() //Relative movement depends on camera rotation
     {
         
         float y = ytarget.rotation.eulerAngles.y;
-        //Debug.Log(y);
-        if (y > 315 || y < 45) //q1: 315-360 ; 360 - 45
+        
+        if (y > 315 || y < 45) 
         {
             quadrant = 1;
         }
-        else if(y>=45 && y<135) //  45 - 135
+        else if(y>=45 && y<135) 
         {
             quadrant = 4;
         }
-        else if (y >= 135 && y <225) // 135-225
+        else if (y >= 135 && y <225) 
         {
             quadrant = 3;
         }
-        else if (y >=225 && y<=315) //225-315
+        else if (y >=225 && y<=315) 
         {
             quadrant = 2;
         }

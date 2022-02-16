@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class Highscore : MonoBehaviour
 {
-    public static Highscore hScore;
+    public static Highscore hScore; 
     public Text higestScoreText;
     public int highScore;
 
     void Start()
     {
-
         DontDestroyOnLoad(this);
     }
 
